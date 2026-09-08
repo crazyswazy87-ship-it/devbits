@@ -5,7 +5,10 @@ import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import PageTransition from './components/layout/PageTransition'
 import RouteLoader from './components/layout/RouteLoader'
+//import Home from './pages/Home'
+//import Devbits from './pages/Devbits'
 import Home from './pages/Home'
+//import Devbits from '/pages/Devbits'
 
 const ComponentsLibrary = lazy(() => import('./pages/ComponentsLibrary'))
 const ComponentDetail = lazy(() => import('./pages/ComponentDetail'))
@@ -25,7 +28,8 @@ export default function App() {
                 path="/"
                 element={
                   <PageTransition>
-                    <Home />
+                    
+                    <Home/>
                   </PageTransition>
                 }
               />

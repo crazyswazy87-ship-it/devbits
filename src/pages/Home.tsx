@@ -1,11 +1,14 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowRight, Terminal } from 'lucide-react'
-import HeroField from '@/components/showcase/HeroField'
-import ComponentCard from '@/components/ui/ComponentCard'
-import InfiniteMarquee from '@/components/showcase/InfiniteMarquee'
-import { components } from '@/data/components'
-import { categories } from '@/data/categories'
+import { components } from '../data/components'
+import { categories } from '../data/categories'
+import ParticleText from '../components/showcase/ParticleText'
+import ScrollVelocity from '../components/showcase/ScrollVelocity'
+import HeroField from '../components/showcase/HeroField'
+import ComponentCard from '../components/ui/ComponentCard'
+import Ferrofluid from '../components/layout/Ferrofluid'
+
 
 const featuredSlugs = [
   'spotlight-card',
@@ -25,7 +28,28 @@ export default function Home() {
       {/* Hero */}
       <section className="relative overflow-hidden">
         <HeroField />
-        <div className="relative mx-auto max-w-4xl px-6 pb-24 pt-28 text-center sm:pt-36">
+            <div >
+              <ParticleText
+                text="Dev Bits"
+                particleSize={3.1}
+                density={7}
+                color="#f8fafc"
+                highlightColor="#f7f5fc"
+                scatter={190}
+                gatherDuration={2900}
+                stagger={420}
+                pointerRepel={42}
+                repelRadius={120}
+                idleDrift={0.8}
+                trigger="mount"
+                fontSize="clamp(3.5rem, 13vw, 9rem)"
+                fontWeight={800}
+                fontFamily="inherit"
+                glow
+              />
+        
+            </div>
+        <div className="relative mx-auto max-w-4xl px-6 pb-24 pt-2 text-center sm:pt-3">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -33,7 +57,7 @@ export default function Home() {
             className="mb-6 inline-flex items-center gap-2 rounded-full border border-hairline bg-surface-2/80 px-3.5 py-1.5 text-xs text-ink-dim backdrop-blur"
           >
             <span className="h-1.5 w-1.5 rounded-full bg-flux" />
-            16 components across 8 categories
+            70 components across 8 categories
           </motion.div>
 
           <motion.h1
@@ -42,9 +66,9 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="text-balance font-display text-4xl font-medium leading-[1.08] tracking-tight text-ink sm:text-6xl"
           >
-            Interface pieces that
+            Build interfaces that
             <br />
-            <span className="text-gradient">move with intent.</span>
+            <span className="text-gradient">feel alive.</span>
           </motion.h1>
 
           <motion.p
@@ -53,9 +77,7 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="mx-auto mt-6 max-w-lg text-balance text-[15px] leading-relaxed text-ink-dim"
           >
-            A library of copy-paste React components, animated with Framer
-            Motion and styled with Tailwind. No install step, no lock-in —
-            take the code and make it yours.
+           Production ready React + TypeScript components with thoughtful motion, clean APIs, and modern styling. Copy the code, customize it, and make it yours.
           </motion.p>
 
           <motion.div
@@ -84,7 +106,14 @@ export default function Home() {
 
       {/* Marquee strip */}
       <section className="border-y border-hairline bg-surface/40 py-5">
-        <InfiniteMarquee />
+        <ScrollVelocity
+          texts={['Dev Bits', 'Scroll Down']} 
+          velocity={100}
+          className="custom-scroll-text"
+          numCopies={6}
+          damping={50}
+          stiffness={400}
+        />
       </section>
 
       {/* Categories */}
@@ -175,22 +204,51 @@ export default function Home() {
 
       {/* Install strip */}
       <section id="install" className="mx-auto max-w-7xl px-6 pb-24">
-        <div className="flex flex-col items-center gap-6 rounded-2xl border border-hairline bg-surface px-8 py-14 text-center">
-          <h2 className="font-display text-2xl font-medium text-ink sm:text-3xl">
-            No package to install
-          </h2>
-          <p className="max-w-md text-sm leading-relaxed text-ink-dim">
-            Every component page gives you the full source. Copy it into your
-            project, adjust the tokens, and it's yours — no dependency on this
-            site, ever.
-          </p>
-          <Link
-            to="/components"
-            className="flex items-center gap-2 rounded-lg bg-ink px-5 py-2.5 text-sm font-medium text-canvas transition-transform hover:scale-[1.02]"
-          >
-            Start browsing
-            <ArrowRight size={15} />
-          </Link>
+        <div className="relative isolate flex flex-col items-center gap-6 overflow-hidden rounded-2xl border border-hairline bg-surface px-8 py-14 text-center">
+
+          {/* Ferrofluid background */}
+          <div className="absolute inset-0 z-0 pointer-events-none">
+            <Ferrofluid
+              colors={["#ffffff", "#ffffff", "#ffffff"]}
+              speed={0.5}
+              scale={1.3}
+              turbulence={1.3}
+              fluidity={0.03}
+              rimWidth={0.18}
+              sharpness={2.5}
+              shimmer={1.5}
+              glow={4.9}
+              flowDirection="down"
+              opacity={0.35}
+              mouseInteraction
+              mouseStrength={1.2}
+              mouseRadius={0.35}
+            />
+          </div>
+
+          {/* Optional dark/transparent overlay to keep text readable */}
+          <div className="absolute inset-0 z-[1] bg-surface/40" />
+
+          {/* Content */}
+          <div className="relative z-10 flex flex-col items-center gap-6">
+            <h2 className="font-display text-2xl font-medium text-ink sm:text-3xl">
+              No package to install
+            </h2>
+
+            <p className="max-w-md text-sm leading-relaxed text-ink-dim">
+              Every component page gives you the full source. Copy it into your
+              project, adjust the tokens, and it's yours — no dependency on this
+              site, ever.
+            </p>
+
+            <Link
+              to="/components"
+              className="flex items-center gap-2 rounded-lg bg-ink px-5 py-2.5 text-sm font-medium text-canvas transition-transform hover:scale-[1.02]"
+            >
+              Start browsing
+              <ArrowRight size={15} />
+            </Link>
+          </div>
         </div>
       </section>
     </div>

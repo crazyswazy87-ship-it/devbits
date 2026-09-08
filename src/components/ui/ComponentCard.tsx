@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
-import type { ComponentEntry } from '@/types'
 import PreviewFrame from './PreviewFrame'
 import CopyButton from './CopyButton'
 import Badge from './Badge'
+import type { ComponentEntry } from '../../types'
 
 export default function ComponentCard({ entry, index = 0 }: { entry: ComponentEntry; index?: number }) {
   return (

@@ -107,3 +107,59 @@ body {
 {
   height: 25px;
 }
+
+/*components categories*/
+.b1x{
+  background-color: black;
+  height: 30px;
+  width: 100px;
+  display: grid;
+  justify-self: center;
+  align-self: center;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 15px;
+  color: #fff;
+  font-size: 17px;
+  position:relative;
+}
+
+
+
+@property --angle{
+  syntax: "<angle>"; 
+  initial-value:0deg;
+  inherits:false ;
+
+}
+
+.b1x::after, .b1x::before{
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-image: conic-gradient(from var(--angle), #fff, black,white,red,white,lightgreen,#fff, black,white,red,white,lightgreen );
+  top: 50%;
+  left: 50%;
+  translate: -50% -50% ;
+  z-index: -1;
+  padding: 3px;
+  border-radius: 30px;
+  animation: 4s spin linear infinite;
+}
+
+.b1x::before{
+  filter: blur(1.3rem);
+  opacity: 0.5;
+}
+@keyframes spin{
+  from{
+    --angle:0deg;
+  }
+  to{
+    --angle:360deg;
+  }
+}
+
