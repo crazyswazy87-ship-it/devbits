@@ -1,0 +1,449 @@
+/* =========================================================
+   ARROW FILL BUTTON
+========================================================= */
+
+.arrow-fill-button {
+  /* =======================================================
+     EASY EDIT SETTINGS
+  ======================================================= */
+
+  --button-height: 3.8vw;
+  --button-min-height: 58px;
+
+  --button-padding-left: 3vw;
+  --button-padding-right: 2vw;
+
+  --button-radius: 999px;
+
+  --button-border-width: 1px;
+  --button-border-color: var(--btn-bg);
+
+  --icon-circle: 3.1vw;
+  --icon-right: 0.55vw;
+
+  --arrow-size: 1.5vw;
+
+  --fill-speed: var(--btn-duration);
+
+  --ease:
+    cubic-bezier(
+      0.785,
+      0.135,
+      0.15,
+      0.86
+    );
+
+
+  /* =======================================================
+     BASE
+  ======================================================= */
+
+  position: relative;
+  isolation: isolate;
+
+  display: inline-flex;
+
+  width: fit-content;
+  min-width: fit-content;
+  max-width: none;
+
+  height: var(--button-height);
+  min-height: var(--button-min-height);
+
+  align-items: center;
+  justify-content: center;
+
+  padding-left: var(--button-padding-left);
+  padding-right:
+    calc(
+      var(--icon-circle) +
+      var(--icon-right) +
+      var(--button-padding-right)
+    );
+
+  overflow: hidden;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+
+  color: var(--btn-text);
+
+   background: rgba(255, 255, 255, 0.096);
+  border: 2px solid  rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: row;
+
+  border:
+    var(--button-border-width)
+    solid
+    var(--button-border-color);
+
+  border-radius: var(--button-radius);
+
+  font-weight: 500;
+
+  font-size: 1.155vw;
+
+  line-height: 1;
+
+  text-decoration: none;
+
+  text-rendering: geometricPrecision;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+/* =========================================================
+   NORMAL TEXT
+========================================================= */
+
+.arrow-fill-button__text {
+  position: relative;
+  z-index: 1;
+
+  padding-bottom: 1px;
+
+  transition:
+    color var(--fill-speed) var(--ease);
+}
+
+
+/* =========================================================
+   EXPANDING FILL
+========================================================= */
+
+.arrow-fill-button__fill {
+  position: absolute;
+
+  z-index: 2;
+
+  pointer-events: none;
+
+  top: calc(
+    (100% - var(--icon-circle)) / 2
+  );
+
+  right: var(--icon-right);
+
+  bottom: calc(
+    (100% - var(--icon-circle)) / 2
+  );
+
+  left: calc(
+    100% -
+    var(--icon-right) -
+    var(--icon-circle)
+  );
+
+  background: var(--btn-fill-bg);
+
+  border-radius: 999px;
+
+  transition:
+    top var(--fill-speed) var(--ease),
+    right var(--fill-speed) var(--ease),
+    bottom var(--fill-speed) var(--ease),
+    left var(--fill-speed) var(--ease),
+    background-color var(--fill-speed) var(--ease);
+}
+
+
+/* =========================================================
+   FILLED TEXT
+========================================================= */
+
+.arrow-fill-button__filled-text {
+  position: absolute;
+
+  z-index: 3;
+
+  inset: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding-left: var(--button-padding-left);
+
+  padding-right:
+    calc(
+      var(--icon-circle) +
+      var(--icon-right) +
+      var(--button-padding-right)
+    );
+
+  color: var(--btn-fill-text);
+
+  pointer-events: none;
+
+  clip-path:
+    inset(
+      calc((100% - var(--icon-circle)) / 2)
+      var(--icon-right)
+      calc((100% - var(--icon-circle)) / 2)
+      calc(100% - var(--icon-right) - var(--icon-circle))
+    );
+
+  transition:
+    clip-path var(--fill-speed) var(--ease),
+    color var(--fill-speed) var(--ease);
+}
+
+
+/* =========================================================
+   ICON CIRCLE
+========================================================= */
+
+.arrow-fill-button__icon {
+  position: absolute;
+
+  z-index: 4;
+
+  right: var(--icon-right);
+  top: 50%;
+
+  display: inline-flex;
+
+  width: var(--icon-circle);
+  height: var(--icon-circle);
+
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  transform:
+    translateY(-50%);
+
+  background: var(--btn-fill-bg);
+
+  color: var(--btn-arrow);
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  transition:
+    background-color var(--fill-speed) var(--ease),
+    color var(--fill-speed) var(--ease);
+}
+
+
+/* =========================================================
+   ARROWS
+========================================================= */
+
+.arrow-fill-button__arrow {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: var(--arrow-size);
+  height: var(--arrow-size);
+
+  transform-origin: center;
+
+  color: currentColor;
+}
+
+
+/* Incoming arrow */
+
+.arrow-fill-button__arrow--incoming {
+  transform:
+    translate(-170%, -50%)
+    scale(0);
+}
+
+
+/* Existing arrow */
+
+.arrow-fill-button__arrow--existing {
+  transform:
+    translate(-50%, -50%)
+    scale(1);
+}
+
+
+/* =========================================================
+   HOVER — FILL
+========================================================= */
+
+.arrow-fill-button:hover
+.arrow-fill-button__fill,
+.arrow-fill-button[data-pressed="true"]
+.arrow-fill-button__fill {
+
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background:
+    var(--btn-fill-bg-hover);
+}
+
+
+/* =========================================================
+   HOVER — FILLED TEXT
+========================================================= */
+
+.arrow-fill-button:hover
+.arrow-fill-button__filled-text,
+.arrow-fill-button[data-pressed="true"]
+.arrow-fill-button__filled-text {
+
+  color:
+    var(--btn-fill-text-hover);
+
+  clip-path:
+    inset(0 0 0 0);
+}
+
+
+/* =========================================================
+   HOVER — ICON
+========================================================= */
+
+.arrow-fill-button:hover
+.arrow-fill-button__icon,
+.arrow-fill-button[data-pressed="true"]
+.arrow-fill-button__icon {
+
+  background:
+    var(--btn-fill-bg-hover);
+
+  color:
+    var(--btn-arrow-hover);
+}
+
+
+/* =========================================================
+   HOVER — INCOMING ARROW
+========================================================= */
+
+.arrow-fill-button:hover
+.arrow-fill-button__arrow--incoming,
+.arrow-fill-button[data-pressed="true"]
+.arrow-fill-button__arrow--incoming {
+
+  transform:
+    translate(-50%, -50%)
+    scale(1);
+}
+
+
+/* =========================================================
+   HOVER — EXISTING ARROW
+========================================================= */
+
+.arrow-fill-button:hover
+.arrow-fill-button__arrow--existing,
+.arrow-fill-button[data-pressed="true"]
+.arrow-fill-button__arrow--existing {
+
+  transform:
+    translate(70%, -50%)
+    scale(0);
+}
+
+
+/* =========================================================
+   HOVER LIFT
+========================================================= */
+
+.arrow-fill-button:hover {
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   ACTIVE
+========================================================= */
+
+.arrow-fill-button:active {
+  transform: scale(0.98);
+}
+
+
+/* =========================================================
+   FOCUS
+========================================================= */
+
+.arrow-fill-button:focus-visible {
+  outline: 2px solid var(--btn-fill-bg-hover);
+
+  outline-offset: 4px;
+}
+
+
+/* =========================================================
+   1025px
+========================================================= */
+
+@media (max-width: 1024px) {
+
+  .arrow-fill-button {
+
+    --button-height: 11vw;
+
+    --button-padding-left: 5vw;
+    --button-padding-right: 4vw;
+
+    --icon-circle: 8vw;
+    --icon-right: 1.5vw;
+
+    --arrow-size: 4vw;
+
+    font-size: 3.15vw;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 767px) {
+
+  .arrow-fill-button {
+
+    --button-height: 15vw;
+
+    --button-padding-left: 7vw;
+    --button-padding-right: 5vw;
+
+    --icon-circle: 11vw;
+    --icon-right: 2vw;
+
+    --arrow-size: 5vw;
+
+    font-size: 4.41vw;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .arrow-fill-button,
+  .arrow-fill-button *,
+  .arrow-fill-button::before,
+  .arrow-fill-button::after {
+
+    transition: none !important;
+  }
+
+}

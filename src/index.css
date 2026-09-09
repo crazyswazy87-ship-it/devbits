@@ -96,6 +96,7 @@ body {
   background: linear-gradient(115deg, #f4f4f8 10%, #b9aaff 45%, #6ee7d6 90%);
   -webkit-background-clip: text;
   background-clip: text;
+  margin-top: -60px;
   color: transparent;
 }
 
@@ -163,3 +164,85 @@ body {
   }
 }
 
+
+.glass-button {
+  background: rgba(255, 255, 255, 0.015);
+  border: 2px solid  rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: row;
+}
+
+/*skin*/
+.pricing-card {
+  position: relative;
+  isolation: isolate;
+  border-radius: 28px;
+  background: #2f2b43;
+  overflow: visible;
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.45s ease;
+}
+
+/* The "skin" */
+.pricing-card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  z-index: -1;
+
+  border-radius: inherit;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(0, 119, 255, 0.15),
+    rgba(0, 234, 255, 0.15)
+  );
+
+  filter: blur(8px);
+
+  opacity: 0.45;
+
+  transform: scale(0.98);
+
+  transition:
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.45s ease,
+    filter 0.45s ease;
+}
+
+/* Stretch the skin */
+.pricing-card:hover::before {
+  transform: scale(1.035, 1.06);
+  opacity: 0.85;
+  filter: blur(10px);
+}
+
+/* Slightly lift the actual card */
+.pricing-card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.25),
+    0 0 25px rgba(255, 170, 0, 0.08);
+}
+
+/*wrap text*/
+.warp-text {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-height: 220px;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: inherit;
+}
+
+.warp-text canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}

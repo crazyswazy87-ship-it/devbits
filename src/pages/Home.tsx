@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowRight, Terminal } from 'lucide-react'
 import { components } from '../data/components'
@@ -8,7 +8,9 @@ import ScrollVelocity from '../components/showcase/ScrollVelocity'
 import HeroField from '../components/showcase/HeroField'
 import ComponentCard from '../components/ui/ComponentCard'
 import Ferrofluid from '../components/layout/Ferrofluid'
-
+import { GlassButton } from '../components/showcase/GlassButton'
+import ArrowFillButton from '../components/layout/ArrowFillButton'
+import WarpText from '../components/layout/WrapText'
 
 const featuredSlugs = [
   'spotlight-card',
@@ -18,6 +20,8 @@ const featuredSlugs = [
   'flip-card-3d',
   'split-reveal',
 ]
+
+const navigate = Navigate
 const featured = featuredSlugs
   .map((slug) => components.find((c) => c.slug === slug))
   .filter((c): c is NonNullable<typeof c> => Boolean(c))
@@ -54,7 +58,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-hairline bg-surface-2/80 px-3.5 py-1.5 text-xs text-ink-dim backdrop-blur"
+            className="mb-0 inline-flex items-center gap-2 rounded-full border border-hairline bg-surface-2/80 px-3.5 py-1.5 text-xs text-ink-dim backdrop-blur"
           >
             <span className="h-1.5 w-1.5 rounded-full bg-flux" />
             70 components across 8 categories
@@ -66,8 +70,23 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="text-balance font-display text-4xl font-medium leading-[1.08] tracking-tight text-ink sm:text-6xl"
           >
-            Build interfaces that
-            <br />
+          <WarpText
+            text="Build interfaces that feel alive."
+            color="#f8f5ff"
+            warpStrength={0.18}
+            warpScale={1.7}
+            speed={0.55}
+            pointerInfluence={0.42}
+            pointerStrength={0.38}
+            refraction={0.018}
+            ripple
+            fontSize={116}
+            fontWeight={800}
+            style={{ height: '320px' }}
+            fontFamily="inherit"
+            letterSpacing={-0.04}
+            lineHeight={0.9}
+          />
             <span className="text-gradient">feel alive.</span>
           </motion.h1>
 
@@ -86,26 +105,20 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row"
           >
-            <Link
-              to="/components"
-              className="group flex items-center gap-2 rounded-lg bg-ink px-5 py-2.5 text-sm font-medium text-canvas transition-transform hover:scale-[1.02]"
-            >
-              Browse components
-              <ArrowRight size={15} className="transition-transform group-hover:translate-x-0.5" />
-            </Link>
-            <a
-              href="#install"
-              className="flex items-center gap-2 rounded-lg border border-hairline bg-surface-2/60 px-5 py-2.5 text-sm font-medium text-ink-dim backdrop-blur transition-colors hover:border-white/20 hover:text-ink"
-            >
-              <Terminal size={15} />
-              npm install framer-motion
-            </a>
+
+            <div className="flex min-h-14 w-full items-center justify-center p-12">
+              <ArrowFillButton
+                btnText="Browse components"
+                href="/components"
+              />
+            </div>
+         
           </motion.div>
         </div>
       </section>
 
       {/* Marquee strip */}
-      <section className="border-y border-hairline bg-surface/40 py-5">
+      <section className=" py-5">
         <ScrollVelocity
           texts={['Dev Bits', 'Scroll Down']} 
           velocity={100}
@@ -130,7 +143,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+        <div className=" grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
           {categories.map((cat, i) => {
             const count = components.filter((c) => c.category === cat.id).length
             return (
@@ -143,7 +156,7 @@ export default function Home() {
               >
                 <Link
                   to={`/components?category=${cat.id}`}
-                  className="group flex h-full flex-col justify-between rounded-xl border border-hairline bg-surface p-5 transition-colors hover:border-white/20 hover:bg-surface-2"
+                  className="pricing-card group flex h-full flex-col justify-between rounded-xl border border-hairline bg-surface p-5 transition-colors hover:border-white/20 hover:bg-surface-2"
                 >
                   <div className="flex items-center justify-between">
                     <span className="grid h-9 w-9 place-items-center rounded-lg border border-hairline bg-surface-2 text-ink-dim transition-colors group-hover:text-signal-soft">
@@ -226,28 +239,23 @@ export default function Home() {
             />
           </div>
 
-          {/* Optional dark/transparent overlay to keep text readable */}
-          <div className="absolute inset-0 z-[1] bg-surface/40" />
-
           {/* Content */}
           <div className="relative z-10 flex flex-col items-center gap-6">
             <h2 className="font-display text-2xl font-medium text-ink sm:text-3xl">
-              No package to install
+              Built for your codebase
             </h2>
 
             <p className="max-w-md text-sm leading-relaxed text-ink-dim">
-              Every component page gives you the full source. Copy it into your
-              project, adjust the tokens, and it's yours — no dependency on this
-              site, ever.
+             Every component gives you the full source. Take what you need, adapt it to your stack, and make it yours.
             </p>
 
-            <Link
-              to="/components"
-              className="flex items-center gap-2 rounded-lg bg-ink px-5 py-2.5 text-sm font-medium text-canvas transition-transform hover:scale-[1.02]"
+            <GlassButton
+              className="flex items-center gap-2 whitespace-nowrap rounded-lg px-5 py-2.5 text-sm font-medium transition-transform hover:scale-[1.02]"
+              onClick={() => navigate("/components")}
             >
-              Start browsing
-              <ArrowRight size={15} />
-            </Link>
+              <Terminal size={15} />
+              npm install framer-motion
+            </GlassButton>
           </div>
         </div>
       </section>
