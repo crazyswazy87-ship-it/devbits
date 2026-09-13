@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ArrowUpRight } from 'lucide-react'
 import PreviewFrame from './PreviewFrame'
-import CopyButton from './CopyButton'
 import Badge from './Badge'
 import type { ComponentEntry } from '../../types'
 
@@ -20,7 +18,7 @@ export default function ComponentCard({ entry, index = 0 }: { entry: ComponentEn
           preview={entry.preview}
           background={entry.previewBackground}
           fill={entry.previewFill}
-          minHeight="11rem"
+          minHeight="13rem"
           className="rounded-none border-0 border-b border-hairline"
         />
       </Link>
@@ -37,16 +35,6 @@ export default function ComponentCard({ entry, index = 0 }: { entry: ComponentEn
           <Badge>{entry.category}</Badge>
         </div>
 
-        <div className="mt-4 flex items-center gap-2">
-          <Link
-            to={`/components/${entry.slug}`}
-            className="flex flex-1 items-center justify-center gap-1.5 rounded-md border border-hairline bg-surface-2 px-3 py-2 text-xs font-medium text-ink-dim transition-colors hover:border-white/20 hover:text-ink"
-          >
-            View code
-            <ArrowUpRight size={13} />
-          </Link>
-          <CopyButton value={entry.code} label="Copy" className="flex-1 justify-center py-2" />
-        </div>
       </div>
     </motion.div>
   )

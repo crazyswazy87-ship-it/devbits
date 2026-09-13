@@ -1,5 +1,5 @@
 import type { ComponentType } from 'react'
-import { cn } from '@/lib/utils'
+import { cn } from '../../lib/utils'
 
 interface PreviewFrameProps {
   preview: ComponentType
@@ -21,7 +21,7 @@ export default function PreviewFrame({
   background = 'grid',
   fill = false,
   className,
-  minHeight = '14rem',
+  minHeight = '13rem',
 }: PreviewFrameProps) {
   return (
     <div

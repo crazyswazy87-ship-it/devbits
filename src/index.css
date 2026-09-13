@@ -246,3 +246,98 @@ body {
   height: 100%;
   display: block;
 }
+
+/* Galaxy background */
+/* Galaxy background */
+
+.galaxy-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
+/* Dev Bits */
+
+.particle-text-layer {
+  position: relative;
+  z-index: 5;
+
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* Warp Text */
+
+.warp-text-layer {
+  position: relative;
+  z-index: 5;
+
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+}
+
+
+/* Main Hero Content */
+
+.hero-content {
+  position: relative;
+  z-index: 5;
+
+  width: 100%;
+  max-width: 1000px;
+
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+
+/* Description */
+
+.hero-description {
+  width: 100%;
+  max-width: 620px;
+
+  margin: -80px auto 0;
+
+  text-align: center;
+}
+
+
+/* Buttons */
+
+.hero-actions {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 12px;
+
+  margin: 29px auto 0;
+}
+
+
+/* Toggle */
+
+.switch {
+  align-self: center;
+  justify-self: center;
+}

@@ -60,7 +60,7 @@ export default function Navbar() {
         <div className="hidden items-center gap-3 md:flex">
           <CommandSearch />
           <a
-            href="https://github.com"
+            href="https://github.com/crazyswazy87-ship-it/devbits"
             target="_blank"
             rel="noreferrer"
             className="grid h-9 w-9 place-items-center rounded-lg border border-hairline text-ink-dim transition-colors hover:border-white/20 hover:text-ink"
@@ -86,7 +86,7 @@ export default function Navbar() {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="overflow-hidden border-b border-hairline bg-canvas md:hidden"
+            className="overflow-hidden border-b border-hairline md:hidden"
           >
             <div className="flex flex-col gap-1 px-6 py-4">
               {links.map((link) => (
@@ -94,7 +94,7 @@ export default function Navbar() {
                   key={link.label}
                   to={link.to}
                   onClick={() => setMobileOpen(false)}
-                  className="rounded-md px-3 py-2 text-sm text-ink-dim hover:bg-surface-2 hover:text-ink"
+                  className="rounded-md px-3 py-2 text-sm text-ink-dim hover:text-ink"
                 >
                   {link.label}
                 </NavLink>

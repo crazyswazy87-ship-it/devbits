@@ -48,7 +48,7 @@ export type ArrowFillButtonProps =
   >;
 
 function ArrowFillButton({
-  btnText = "Hover Me",
+  btnText = "Components",
   href = DEFAULT_HREF,
   className = "",
 
@@ -56,10 +56,11 @@ function ArrowFillButton({
   textColor = "#ffffff",
 
   fillBgColor = "#ffffff",
-  fillTextColor = "#ff5f00",
+  fillTextColor = "#38BDF8",
+
 
   hoverFillBgColor = "#ffffff",
-  hoverFillTextColor = "#ff5f00",
+  hoverFillTextColor = "#38BDF8",
 
   arrowColor,
   hoverArrowColor,

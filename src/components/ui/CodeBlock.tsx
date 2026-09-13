@@ -23,7 +23,7 @@ export default function CodeBlock({ code, language = 'tsx', filename }: CodeBloc
         </div>
         <CopyButton value={code} />
       </div>
-      <Highlight theme={themes.vsDark} code={code.trim()} language={language}>
+      <Highlight theme={themes.vsDark} code={(code ?? '').trim()} language={language}>
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <pre
             className={`${className} max-h-[480px] overflow-auto p-4 font-mono text-[13px] leading-relaxed`}

@@ -1,16 +1,19 @@
-import { Link, Navigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight, Terminal } from 'lucide-react'
 import { components } from '../data/components'
 import { categories } from '../data/categories'
 import ParticleText from '../components/showcase/ParticleText'
 import ScrollVelocity from '../components/showcase/ScrollVelocity'
-import HeroField from '../components/showcase/HeroField'
+//import HeroField from '../components/showcase/HeroField'
 import ComponentCard from '../components/ui/ComponentCard'
 import Ferrofluid from '../components/layout/Ferrofluid'
 import { GlassButton } from '../components/showcase/GlassButton'
 import ArrowFillButton from '../components/layout/ArrowFillButton'
 import WarpText from '../components/layout/WrapText'
+import Galaxy from '../components/layout/Galaxy'
+import ToggleSwitch from '../components/layout/ToggleSwitch'
 
 const featuredSlugs = [
   'spotlight-card',
@@ -21,106 +24,132 @@ const featuredSlugs = [
   'split-reveal',
 ]
 
-const navigate = Navigate
+
 const featured = featuredSlugs
   .map((slug) => components.find((c) => c.slug === slug))
   .filter((c): c is NonNullable<typeof c> => Boolean(c))
 
 export default function Home() {
+  const [galaxyIndex, setGalaxyIndex] = useState<4 | 6>(6);
+  const isGalaxy6 = galaxyIndex === 6;
+
+  const navigate = useNavigate();
   return (
     <div>
-      {/* Hero */}
-      <section className="relative overflow-hidden">
-        <HeroField />
-            <div >
-              <ParticleText
-                text="Dev Bits"
-                particleSize={3.1}
-                density={7}
-                color="#f8fafc"
-                highlightColor="#f7f5fc"
-                scatter={190}
-                gatherDuration={2900}
-                stagger={420}
-                pointerRepel={42}
-                repelRadius={120}
-                idleDrift={0.8}
-                trigger="mount"
-                fontSize="clamp(3.5rem, 13vw, 9rem)"
-                fontWeight={800}
-                fontFamily="inherit"
-                glow
-              />
-        
-            </div>
-        <div className="relative mx-auto max-w-4xl px-6 pb-24 pt-2 text-center sm:pt-3">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="mb-0 inline-flex items-center gap-2 rounded-full border border-hairline bg-surface-2/80 px-3.5 py-1.5 text-xs text-ink-dim backdrop-blur"
-          >
-            <span className="h-1.5 w-1.5 rounded-full bg-flux" />
-            70 components across 8 categories
-          </motion.div>
+     {/* Hero */}
+      <section className="hero-section relative overflow-hidden">
 
-          <motion.h1
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-balance font-display text-4xl font-medium leading-[1.08] tracking-tight text-ink sm:text-6xl"
-          >
-          <WarpText
-            text="Build interfaces that feel alive."
-            color="#f8f5ff"
-            warpStrength={0.18}
-            warpScale={1.7}
-            speed={0.55}
-            pointerInfluence={0.42}
-            pointerStrength={0.38}
-            refraction={0.018}
-            ripple
-            fontSize={116}
-            fontWeight={800}
-            style={{ height: '320px' }}
-            fontFamily="inherit"
-            letterSpacing={-0.04}
-            lineHeight={0.9}
+        {/* Galaxy Background */}
+        <div
+          className="galaxy-container"
+          style={{ zIndex: galaxyIndex }}
+        >
+          <Galaxy
+            mouseRepulsion
+            mouseInteraction
+            density={1}
+            glowIntensity={0.09}
+            saturation={0}
+            hueShift={140}
+            twinkleIntensity={0.9}
+            rotationSpeed={0.15}
+            repulsionStrength={2}
+            autoCenterRepulsion={0}
+            starSpeed={0.8}
+            speed={1}
           />
-            <span className="text-gradient">feel alive.</span>
-          </motion.h1>
+        </div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="mx-auto mt-6 max-w-lg text-balance text-[15px] leading-relaxed text-ink-dim"
-          >
-           Production ready React + TypeScript components with thoughtful motion, clean APIs, and modern styling. Copy the code, customize it, and make it yours.
-          </motion.p>
+        {/* Hero Content */}
+        <div className="hero-inner">
 
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row"
-          >
+          {/* Dev Bits */}
+          <div className="particle-text-layer">
+            <ParticleText
+              text="Dev Bits"
+              particleSize={3.1}
+              density={7}
+              color="#f8fafc"
+              highlightColor="#f7f5fc"
+              scatter={190}
+              gatherDuration={2900}
+              stagger={420}
+              pointerRepel={42}
+              repelRadius={120}
+              idleDrift={0.8}
+              trigger="mount"
+              fontSize="clamp(3.5rem, 13vw, 9rem)"
+              fontWeight={800}
+              fontFamily="inherit"
+              glow
+            />
+          </div>
 
-            <div className="flex min-h-14 w-full items-center justify-center p-12">
-              <ArrowFillButton
-                btnText="Browse components"
-                href="/components"
+          {/* Toggle */}
+          <div className="hero-switch">
+            <ToggleSwitch
+              isActive={isGalaxy6}
+              onChange={(active) => {
+                setGalaxyIndex(active ? 6 : 4);
+              }}
+              size="md"
+              colorTheme="default"
+              glassEffect
+              className="switch"
+            />
+          </div>
+
+          {/* Main Text */}
+          <div className="hero-copy">
+
+            <div className="warp-text-layer">
+              <WarpText
+                text="Build interfaces that feel alive."
+                color="#f8f5ff"
+                warpStrength={0.18}
+                warpScale={1.7}
+                speed={0.55}
+                pointerInfluence={0.42}
+                pointerStrength={0.38}
+                refraction={0.018}
+                ripple
+                fontSize={116}
+                fontWeight={800}
+                style={{ height: "260px" }}
+                fontFamily="inherit"
+                letterSpacing={-0.04}
+                lineHeight={0.9}
               />
             </div>
-         
-          </motion.div>
+
+            <p className="hero-description">
+              A collection of interactive components built for modern
+              interfaces, motion, and immersive digital experiences.
+            </p>
+
+            {/* Buttons */}
+            <div className="hero-actions"
+              style={{
+              position: "relative",
+              zIndex: 10,
+            }}>
+
+              <ArrowFillButton
+              onClick={() => navigate("/components")}>
+                Components
+              </ArrowFillButton>
+            </div>
+
+          </div>
+
         </div>
+
       </section>
 
       {/* Marquee strip */}
       <section className=" py-5">
         <ScrollVelocity
-          texts={['Dev Bits', 'Scroll Down']} 
+          texts={['Dev Bits', 'Explore Components']}
           velocity={100}
           className="custom-scroll-text"
           numCopies={6}
@@ -128,6 +157,8 @@ export default function Home() {
           stiffness={400}
         />
       </section>
+
+      
 
       {/* Categories */}
       <section className="mx-auto max-w-7xl px-6 py-24">
@@ -185,7 +216,7 @@ export default function Home() {
               Featured components
             </h2>
             <p className="mt-2 max-w-md text-sm text-ink-dim">
-              A handful worth trying first — hover each preview to see the
+              A handful worth trying first hover each preview to see the
               interaction, then grab the code.
             </p>
           </div>

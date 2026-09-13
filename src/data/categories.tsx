@@ -7,6 +7,7 @@ import {
   Wand2,
   Compass,
   Box,
+  List,
 } from 'lucide-react'
 import type { CategoryMeta } from '../types'
 
@@ -22,6 +23,12 @@ export const categories: CategoryMeta[] = [
     label: 'Buttons',
     description: 'Interactive triggers with magnetic pulls and glow states.',
     icon: <MousePointerClick size={16} />,
+  },
+  {
+    id: 'Lists',
+    label: 'Lists',
+    description: 'Interactive lists with selection, scrolling, and motion.',
+    icon: <List size={16} />,
   },
   {
     id: 'Cards',

@@ -1,8 +1,6 @@
 import { useCallback, useEffect, useRef } from 'react';
 import type { CSSProperties, ReactNode } from 'react';
 
-import './ScrollExpand.css';
-
 const clamp = (v: number, a: number, b: number): number => (v < a ? a : v > b ? b : v);
 
 const smoothstep = (edge0: number, edge1: number, x: number): number => {
@@ -229,7 +227,7 @@ const ScrollExpand: React.FC<ScrollExpandProps> = ({
     mediaType === 'video' ? (
       <video
         ref={mediaRef}
-        className="scroll-expand__media"
+        className="absolute inset-0 w-full h-full object-cover origin-center select-none [will-change:transform]"
         src={src}
         poster={poster}
         autoPlay
@@ -238,34 +236,55 @@ const ScrollExpand: React.FC<ScrollExpandProps> = ({
         playsInline
       />
     ) : (
-      <img ref={mediaRef} className="scroll-expand__media" src={src} alt={alt} draggable={false} />
+      <img
+        ref={mediaRef}
+        className="absolute inset-0 w-full h-full object-cover origin-center select-none [will-change:transform]"
+        src={src}
+        alt={alt}
+        draggable={false}
+      />
     );
 
   return (
     <div
       ref={rootRef}
-      className={`scroll-expand ${useWindowScroll ? '' : 'scroll-expand--scroller'} ${className}`.trim()}
+      className={`relative w-full h-full ${useWindowScroll ? '' : 'overflow-y-auto overflow-x-hidden overscroll-contain [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden'} ${className}`.trim()}
       style={style}
       {...rest}
     >
-      <div ref={trackRef} className="scroll-expand__track">
-        <div ref={stageRef} className="scroll-expand__stage">
-          <div ref={frameRef} className="scroll-expand__frame">
+      <div ref={trackRef} className="relative w-full">
+        <div ref={stageRef} className="sticky top-0 w-full overflow-hidden [--se-title-size:4rem]">
+          <div
+            ref={frameRef}
+            className="absolute inset-0 [clip-path:inset(21%_29%_21%_29%_round_24px)] [will-change:clip-path]"
+          >
             {media}
-            <div ref={scrimRef} className="scroll-expand__scrim" />
+            <div
+              ref={scrimRef}
+              className="absolute inset-0 opacity-0 pointer-events-none bg-[linear-gradient(to_top,rgba(0,0,0,0.75),rgba(0,0,0,0.1)_45%,rgba(0,0,0,0.35))]"
+            />
             {children ? (
-              <div ref={overlayRef} className="scroll-expand__overlay">
+              <div
+                ref={overlayRef}
+                className="absolute inset-0 flex flex-col items-center justify-center text-center p-[6%] opacity-0 [will-change:opacity,transform]"
+              >
                 {children}
               </div>
             ) : null}
           </div>
           {title ? (
-            <div ref={titleRef} className="scroll-expand__title">
+            <div
+              ref={titleRef}
+              className="absolute inset-0 flex items-center justify-center m-0 px-[6%] text-center font-bold leading-none tracking-[-0.03em] text-white [font-size:var(--se-title-size)] [text-shadow:0_2px_24px_rgba(0,0,0,0.45)] pointer-events-none [will-change:opacity,transform]"
+            >
               {title}
             </div>
           ) : null}
           {scrollHint ? (
-            <div ref={hintRef} className="scroll-expand__hint">
+            <div
+              ref={hintRef}
+              className="absolute inset-x-0 bottom-5 text-center text-[0.8125rem] tracking-[0.02em] text-white/55 pointer-events-none [will-change:opacity,transform]"
+            >
               {scrollHint}
             </div>
           ) : null}
